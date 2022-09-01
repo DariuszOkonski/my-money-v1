@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
 
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
@@ -9,10 +10,7 @@ function App() {
   return (
     <div className="App">
         <BrowserRouter>
-          <h1>Money-app</h1>
-          <Link to="/">Home</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Signup</Link>
+          <Navbar />          
 
           <Routes>
             <Route path='/' element={<Home />} />
