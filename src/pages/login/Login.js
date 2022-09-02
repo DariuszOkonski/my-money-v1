@@ -30,8 +30,8 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
                 />
-                <button className='btn'>Login</button>
             </label>
+            <button className='btn'>Login</button>
         </form>
     )
 }
