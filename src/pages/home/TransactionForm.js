@@ -8,6 +8,9 @@ export default function TransactionForm() {
         e.preventDefault();
 
         console.log(name, amount);
+
+        setName("");
+        setAmount("");
     }
 
     return (
