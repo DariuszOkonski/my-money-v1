@@ -1,5 +1,5 @@
 import { useReducer, useEffect, useState } from 'react';
-import { projectFirestore } from '../firebase/config';
+import { projectFirestore, timestamp } from '../firebase/config';
 
 let initialState = {
     document: null,
@@ -38,25 +38,27 @@ const firestoreReducer = (state, action) => {
 
 export const useFirestore = (collection) => {
     const [response, dispatch] = useReducer(firestoreReducer, initialState)   
-    const [, setIsCanceled] = useState(false);
+    const [isCanceled, setIsCanceled] = useState(false);
 
     // collection ref
     const ref = projectFirestore.collection(collection);
 
     // only dispatch if not canceled
     const dispatchIfNotCancel = (action) => {
-        if (!isCanceled) {
+        // if (!isCanceled) {
             dispatch(action)
-        }
+        // }
     }
 
     const addDocument = async (doc) => {
         dispatch({ type: 'IS_PENDING'})
 
         try {
-            const addedDocument = await ref.add(doc);            
-            dispatchIfNotCancel({ type: 'ADDED_DOCUMENT', payload: addDocument })
+            const createdAt = timestamp.fromDate(new Date());
+            const addedDocument = await ref.add({ ...doc, createdAt });             
+            dispatchIfNotCancel({ type: 'ADDED_DOCUMENT', payload: addedDocument })
         } catch (err) {
+            console.log(err)
             dispatchIfNotCancel({ type: 'ERROR', payload: err.message})
         }
     }
@@ -66,7 +68,10 @@ export const useFirestore = (collection) => {
     }
 
     useEffect(() => {    
-      return () => setIsCanceled(true);
+      return () => {
+            console.log('cleanup function')
+            setIsCanceled(true);
+        }
     }, [])
     
 
