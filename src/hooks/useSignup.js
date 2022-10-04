@@ -48,7 +48,7 @@ export const useSignup = () => {
   useEffect(() => {
     return () => {
       console.log("useSignup cleanup");
-      setIsCanceled(true);
+      // setIsCanceled(true);
     };
   }, []);
 

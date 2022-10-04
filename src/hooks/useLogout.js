@@ -36,7 +36,7 @@ export const useLogout = () => {
   useEffect(() => {
     return () => {
       console.log("useLogout cleanup");
-      setIsCancelled(true);
+      // setIsCancelled(true);
     };
   }, []);
 
