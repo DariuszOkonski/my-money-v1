@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { projectFirestore } from "../firebase/config";
 
-export const useCollection = (collection, _query = null) => {
+export const useCollection = (collection, _query = null, _orderBy = null) => {
   const [documents, setDocuments] = useState(null);
   const [error, setError] = useState(null);
 
@@ -10,12 +10,17 @@ export const useCollection = (collection, _query = null) => {
    * _query is an array and is "different" on every function call
    */
   const query = useRef(_query).current;
+  const orderBy = useRef(_orderBy).current;
 
   useEffect(() => {
     let ref = projectFirestore.collection(collection);
 
     if (query) {
       ref = ref.where(...query);
+    }
+
+    if (orderBy) {
+      ref.orderBy(..._orderBy);
     }
 
     const unsubscribe = ref.onSnapshot(
@@ -40,7 +45,7 @@ export const useCollection = (collection, _query = null) => {
       console.log("clean up in useCollection");
       //   unsubscribe();
     };
-  }, [collection, query]);
+  }, [collection, query, orderBy]);
 
   return { documents, error };
 };
