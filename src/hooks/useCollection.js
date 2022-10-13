@@ -35,14 +35,14 @@ export const useCollection = (collection, _query = null, _orderBy = null) => {
         setError(null);
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
         setError("could not fetch the data");
       }
     );
 
     //unsubscribe on unmount
     return () => {
-      console.log("clean up in useCollection");
+      // console.log("clean up in useCollection");
       //   unsubscribe();
     };
   }, [collection, query, orderBy]);

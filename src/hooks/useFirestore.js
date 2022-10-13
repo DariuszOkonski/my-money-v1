@@ -90,7 +90,7 @@ export const useFirestore = (collection) => {
 
   useEffect(() => {
     return () => {
-      console.log("cleanup useFirestore");
+      // console.log("cleanup useFirestore");
       // setIsCancelled(true);
     };
   }, []);

@@ -26,7 +26,7 @@ export const useLogout = () => {
       }
     } catch (err) {
       if (!isCancelled) {
-        console.log(err.message);
+        // console.log(err.message);
         setError(err.message);
         setIsPending(false);
       }
@@ -35,7 +35,7 @@ export const useLogout = () => {
 
   useEffect(() => {
     return () => {
-      console.log("useLogout cleanup");
+      // console.log("useLogout cleanup");
       // setIsCancelled(true);
     };
   }, []);

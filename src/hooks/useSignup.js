@@ -38,7 +38,7 @@ export const useSignup = () => {
       }
     } catch (err) {
       if (!isCanceled) {
-        console.log(err.message);
+        // console.log(err.message);
         setError(err.message);
         setIsPending(false);
       }
@@ -47,7 +47,7 @@ export const useSignup = () => {
 
   useEffect(() => {
     return () => {
-      console.log("useSignup cleanup");
+      // console.log("useSignup cleanup");
       // setIsCanceled(true);
     };
   }, []);

@@ -23,7 +23,7 @@ export const useLogin = () => {
       }
     } catch (err) {
       if (!isCancelled) {
-        console.log(err.message);
+        // console.log(err.message);
         setError(err.message);
         setIsPending(false);
       }
@@ -32,7 +32,7 @@ export const useLogin = () => {
 
   useEffect(() => {
     return () => {
-      console.log("clear useLogin");
+      // console.log("clear useLogin");
       //   setIsCancelled(true);
     };
   }, []);
